@@ -54,9 +54,15 @@ ul {
 }
 
 /* B. Hero */
-.hero {
+.hero {   
+    display: flex;
+    justify-content: center;
     height: 60vh;
     background-color: #39397a;
+}
+
+.sleep-person-image {
+    height: 600px;
 }
 
 /* C. Content */
