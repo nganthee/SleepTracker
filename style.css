@@ -186,3 +186,11 @@ a {
     text-decoration: none;
     color: #cfa98a;
 }
+
+.moon-image{
+    position: absolute;
+    top: 4rem;
+    left: 20rem;
+    width: 20rem;
+
+}
