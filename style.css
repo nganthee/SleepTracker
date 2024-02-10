@@ -140,7 +140,9 @@ button.addButton {
     justify-content: center;
     align-items: center;
     background-color: purple;
-    height: 400px;
+    padding: 40px 10%;
+    gap: 30px;
+    flex-wrap: wrap;
 }
 
 canvas {
@@ -164,7 +166,9 @@ canvas {
     height: 45px;
 }
 
-
+/* .displayTime {
+    color: 
+} */
 
 
 /* General */

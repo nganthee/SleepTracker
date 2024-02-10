@@ -15,8 +15,13 @@ new Chart("myChart", {
     },
     options: {
         legend: { display: false },
-        // scales: {
-        //     yAxes: [{ ticks: { min: 6, max: 16 } }],
-        // }
+        scales: {
+            y: {
+                title: {
+                  display: true,
+                  text: 'Your Title'
+                }
+              }
+        }
     }
 });

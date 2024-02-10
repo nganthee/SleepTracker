@@ -6,6 +6,12 @@ const selectMenu = document.querySelectorAll("select");
 const timeList = document.querySelector(".timeList");
 
 let alarmTime, isAlarmSet;
+let xValsStart = ["2/5", "2/6", "2/7", "2/8", "2/9"]; //Date
+let yValsStart = [2230, 2330, 2430, 2230, 2200]; //Time
+let xValsStop = ["2/6", "2/7", "2/8", "2/9", "2/10"] //Date
+let yValsStop = [830, 630, 1200, 300, 1300] //Time
+let xValsLength = xValsStart // Date
+let yValsLength = [10, 7, 11.5, 4.5, 15] // Time
 
 // assign the values for the option menu
 for (let i = 12; i > 0; i--) {
@@ -63,31 +69,63 @@ setInterval(() => {
     if (alarmTime === `${h}:${m} ${ampm}`) {
         alert("Alarm!");
         alarmTime = "";
-        timeList.remove(timeList.lastChild);
-        addButton.textContent("Add Alarm");
+        timeList.removeChild(timeList.firstElementChild);
+        addButton.textContent = "Add Alarm";
         isAlarmSet = false;
+        let date = new Date();
+        let day = date.getDate();
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+        let hour = date.getHours();
+        let minute = date.getMinutes();
+        let currentDate = `${day}/${month}`;
+        let currentTime = hour * 100 + minute;
+
+        configTimeStop.data.labels.push(currentDate);
+        configTimeStop.data.datasets[0].data.push(currentTime);
+        myChartStop.update();
     }
 });
 
+let count = 0;
 function setAlarm() {
     if (isAlarmSet == true) {
         console.log("clear");
-        timeList.remove(timeList.lastChild);
         addButton.textContent = "Add Alarm";
+        timeList.removeChild(timeList.firstElementChild);
         isAlarmSet = false;
+        configTimeStart.data.labels.pop();
+        configTimeStart.data.datasets[0].data.pop();
+        myChart.update();
         return;
     }
     let time = `${selectMenu[0].value}:${selectMenu[1].value} ${selectMenu[2].value}`;
+    console.log(time);
     if (time.includes("Hour") || time.includes("Minute") || time.includes("AM/PM")) {
         return alert("Please, select a valid time to set Alarm!");
     }
     alarmTime = time;
-    let newTime = document.createElement("div");
+    const newTime = document.createElement("div");
     newTime.setAttribute("class", "timeItem");
     newTime.textContent = alarmTime;
     timeList.appendChild(newTime);
     addButton.textContent = "Clear Alarm";
     isAlarmSet = true;
+    count = count + 1;
+    console.log(count);
+    let date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let hour = date.getHours();
+    let minute = date.getMinutes();
+    let currentDate = `${day}/${month}`;
+    let currentTime = hour * 100 + minute;
+
+    configTimeStart.data.labels.push(currentDate);
+    configTimeStart.data.datasets[0].data.push(currentTime);
+    myChart.update();
+
 }
 addButton.addEventListener("click", setAlarm);
 
@@ -95,3 +133,69 @@ setInterval(setClock, 1000);
 
 setClock();
 
+let configTimeStart = {
+    type: "line",
+    data: {
+        labels: xValsStart,
+        datasets: [{
+            fill: false,
+            lineTension: 0,
+            backgroundColor: "rgba(0,0,255,1.0)",
+            borderColor: "rgba(0,0,255,0.1)",
+            data: yValsStart
+        }]
+    },
+    options: {
+        legend: { display: false },
+        title: {
+            text: "Daily Time Go to bed ",
+            display: true
+        }
+    }
+}
+let myChart = new Chart("myChart", configTimeStart);
+
+let configTimeStop = {
+    type: "line",
+    data: {
+        labels: xValsStop,
+        datasets: [{
+            fill: false,
+            lineTension: 0,
+            backgroundColor: "rgba(0,0,255,1.0)",
+            borderColor: "rgba(0,0,255,0.1)",
+            data: yValsStop
+        }]
+    },
+    options: {
+        legend: { display: false },
+        title: {
+            text: "Daily Time Wake Up",
+            display: true
+        }
+    }
+}
+
+let myChartStop = new Chart("myChartStop", configTimeStop);
+
+let configTimeLength = {
+    type: "bar",
+    data: {
+        labels: xValsLength,
+        datasets: [{
+            fill: false,
+            lineTension: 0,
+            backgroundColor: "rgba(0,0,255,1.0)",
+            borderColor: "rgba(0,0,255,0.1)",
+            data: yValsLength
+        }]
+    },
+    options: {
+        legend: { display: false },
+        title: {
+            text: "Time sleeping",
+            display: true
+        }
+    }
+}
+let myChartLength = new Chart("myChartLength", configTimeLength);

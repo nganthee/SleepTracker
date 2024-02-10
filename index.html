@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>zZZ</title>
     <link rel="stylesheet" href="style.css">
-    <script def src="script.js"></script>
+    <script src="clock.js" defer></script>
 </head>
 
 <body>
@@ -17,7 +17,7 @@
         <ul class="rightBar">
             <li class="item"><a href="#clock">clock</a></li>
             <li class="item"><a href="#tracker">tracker</a></li>
-            <li class="item"><a href="#sleepathon">"sleepathon"</a></li>
+            <li class="item"><a href="#">"sleepathon"</a></li>
         </ul>
     </div>
 
@@ -52,16 +52,16 @@
 
         </div>
         <div class="timeList"></div>
-        <script src="clock.js"></script>
     </div>
 
     <!-- Tracker -->
     <div class="tracker" id="tracker">
+        <label></label>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
-        <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-
-        <script src="chart.js"></script>
+        <canvas id="myChart" style="width:100%;max-width:400px"></canvas>
+        <canvas id="myChartStop" style="width:100%;max-width:400px"></canvas>
+        <canvas id="myChartLength" style="width:100%;max-width:400px"></canvas>
     </div>
 
     <!-- sleepathon -->
