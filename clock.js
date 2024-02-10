@@ -84,6 +84,7 @@ setInterval(() => {
         configTimeStop.data.labels.push(currentDate);
         configTimeStop.data.datasets[0].data.push(currentTime);
         myChartStop.update();
+
     }
 });
 
