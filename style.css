@@ -122,10 +122,12 @@ ul {
     margin: 20px;
     width: 700px;
     border-radius: 20px;
-    background-color: #410179;
+    background-color: #ffc0cb;
     text-align: center;
     padding: 35px;
+    font-size: 30px;
 }
+
 
 select {
     width: 80px;
